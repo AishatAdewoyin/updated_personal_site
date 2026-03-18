@@ -27,8 +27,8 @@
         <!-- Desktop Navigation -->
         <ul class="nav-links" id="nav-links">
             <li><a href="#hero" class="nav-link">Home</a></li>
-            <li><a href="#projects" class="nav-link">Projects</a></li>
             <li><a href="#about" class="nav-link">About</a></li>
+            <li><a href="#projects" class="nav-link">Projects</a></li>
             <li><a href="#languages" class="nav-link">Languages</a></li>
             <li><a href="#youtube" class="nav-link">YouTube</a></li>
             <li><a href="#blog" class="nav-link">Blog</a></li>
@@ -47,8 +47,8 @@
     <div class="mobile-menu" id="mobile-menu">
         <ul class="mobile-nav-links">
             <li><a href="#hero" class="mobile-nav-link">Home</a></li>
-            <li><a href="#projects" class="mobile-nav-link">Projects</a></li>
             <li><a href="#about" class="mobile-nav-link">About</a></li>
+            <li><a href="#projects" class="mobile-nav-link">Projects</a></li>
             <li><a href="#languages" class="mobile-nav-link">Languages</a></li>
             <li><a href="#youtube" class="mobile-nav-link">YouTube</a></li>
             <li><a href="#blog" class="mobile-nav-link">Blog</a></li>
@@ -80,39 +80,6 @@
             </div>
         </section>
 
-        <!-- Section 2: Projects (GitHub) -->
-        <section class="section projects" id="projects" aria-labelledby="projects-title">
-            <div class="section-container">
-                <div class="section-header">
-                    <h2 class="section-title" id="projects-title" data-animate="fade-right">Projects</h2>
-                    <div class="accent-rule" data-animate="scale-x"></div>
-                    <a href="https://github.com/aishatadewoyin" target="_blank" rel="noopener noreferrer" class="section-link" data-animate="fade-in">
-                        View all on GitHub →
-                    </a>
-                </div>
-                
-                <div class="projects-grid" id="projects-grid">
-                    <!-- Projects will be loaded here via GitHub API -->
-                    <div class="project-card project-card-large loading-skeleton" data-animate="fade-right">
-                        <div class="skeleton-content">
-                            <div class="skeleton-title"></div>
-                            <div class="skeleton-text"></div>
-                            <div class="skeleton-text short"></div>
-                        </div>
-                    </div>
-                    <div class="project-card loading-skeleton" data-animate="fade-left">
-                        <div class="skeleton-content">
-                            <div class="skeleton-title"></div>
-                            <div class="skeleton-text"></div>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="projects-error" id="projects-error" style="display: none;">
-                    <p>Unable to load projects. Please visit my <a href="https://github.com/aishatadewoyin" target="_blank" rel="noopener noreferrer">GitHub profile</a>.</p>
-                </div>
-            </div>
-        </section>
 
         <!-- Section 3: About -->
         <section class="section about" id="about" aria-labelledby="about-title">
@@ -151,6 +118,40 @@
                             <img src="images/aishat_adewoyin-1.jpeg" alt="Aishat Adewoyin" class="about-headshot" loading="lazy">
                         </div>
                     </div>
+                </div>
+            </div>
+        </section>
+
+              <!-- Section 2: Projects (GitHub) -->
+        <section class="section projects" id="projects" aria-labelledby="projects-title">
+            <div class="section-container">
+                <div class="section-header">
+                    <h2 class="section-title" id="projects-title" data-animate="fade-right">Projects</h2>
+                    <div class="accent-rule" data-animate="scale-x"></div>
+                    <a href="https://github.com/aishatadewoyin" target="_blank" rel="noopener noreferrer" class="section-link" data-animate="fade-in">
+                        View all on GitHub →
+                    </a>
+                </div>
+                
+                <div class="projects-grid" id="projects-grid">
+                    <!-- Projects will be loaded here via GitHub API -->
+                    <div class="project-card project-card-large loading-skeleton" data-animate="fade-right">
+                        <div class="skeleton-content">
+                            <div class="skeleton-title"></div>
+                            <div class="skeleton-text"></div>
+                            <div class="skeleton-text short"></div>
+                        </div>
+                    </div>
+                    <div class="project-card loading-skeleton" data-animate="fade-left">
+                        <div class="skeleton-content">
+                            <div class="skeleton-title"></div>
+                            <div class="skeleton-text"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="projects-error" id="projects-error" style="display: none;">
+                    <p>Unable to load projects. Please visit my <a href="https://github.com/aishatadewoyin" target="_blank" rel="noopener noreferrer">GitHub profile</a>.</p>
                 </div>
             </div>
         </section>
