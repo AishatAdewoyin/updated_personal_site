@@ -4,12 +4,13 @@ const SELECTED_GITHUB_REPOS = [
     'portfolio', 
     'Albert-einstein-biography',
     'banking-system',
-    'azkasplace'
+    'azkasplace',
+    'CitiGuide',
 ];
 
 // YouTube Configuration  
 const YOUTUBE_API_KEY = 'YOUR_API_KEY_HERE';
-const YOUTUBE_CHANNEL_ID = 'YOUR_CHANNEL_ID_HERE'; // <-- REPLACE THIS
+const YOUTUBE_CHANNEL_ID = 'CuriousBytesByAisha';
 
 // ============================================
 // DOM ELEMENTS
@@ -426,7 +427,7 @@ async function fetchYouTubeVideos() {
     }
 
     try {
-        // Fetch latest videos from channel
+        // Fetches latest videos from channel
         const response = await fetch(
             `https://www.googleapis.com/youtube/v3/search?key=${YOUTUBE_API_KEY}&channelId=${YOUTUBE_CHANNEL_ID}&part=snippet,id&order=date&maxResults=3&type=video`
         );
@@ -479,7 +480,7 @@ function renderVideos(videos) {
     
     videosContainer.innerHTML = videosHTML;
     
-    // Re-initialize animations for new elements
+    // Re-initializes animations for new elements
     const newAnimatedElements = videosContainer.querySelectorAll('[data-animate]');
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
@@ -556,12 +557,12 @@ function escapeHtml(text) {
 // ============================================
 
 document.addEventListener('DOMContentLoaded', () => {
-    // Initialize navigation
+    // Initializes navigation
     initMobileNav();
     initNavScroll();
     initSmoothScroll();
     
-    // Initialize scroll animations
+    // Initializse scroll animations
     initScrollAnimations();
     initLanguageProgress();
     
