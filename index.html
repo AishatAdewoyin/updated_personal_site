@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Aisha - Software Engineer & Builder. Portfolio showcasing projects, blog, and YouTube channel.">
+    <title>Aisha | Software Engineer & Builder</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Noise Overlay -->
+    <div class="noise-overlay" aria-hidden="true"></div>
+    
+    <!-- Navigation -->
+    <nav class="nav" id="nav">
+        <div class="nav-logo">
+            <a href="#hero" class="logo-link">Aisha.</a>
+        </div>
+        
+        <!-- Desktop Navigation -->
+        <ul class="nav-links" id="nav-links">
+            <li><a href="#hero" class="nav-link">Home</a></li>
+            <li><a href="#projects" class="nav-link">Projects</a></li>
+            <li><a href="#about" class="nav-link">About</a></li>
+            <li><a href="#youtube" class="nav-link">YouTube</a></li>
+            <li><a href="#blog" class="nav-link">Blog</a></li>
+            <li><a href="#contact" class="nav-link">Contact</a></li>
+        </ul>
+        
+        <!-- Mobile Menu Button -->
+        <button class="menu-toggle" id="menu-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
+            <span class="menu-bar"></span>
+            <span class="menu-bar"></span>
+            <span class="menu-bar"></span>
+        </button>
+    </nav>
+    
+    <!-- Mobile Menu Overlay -->
+    <div class="mobile-menu" id="mobile-menu">
+        <ul class="mobile-nav-links">
+            <li><a href="#hero" class="mobile-nav-link">Home</a></li>
+            <li><a href="#projects" class="mobile-nav-link">Projects</a></li>
+            <li><a href="#about" class="mobile-nav-link">About</a></li>
+            <li><a href="#youtube" class="mobile-nav-link">YouTube</a></li>
+            <li><a href="#blog" class="mobile-nav-link">Blog</a></li>
+            <li><a href="#contact" class="mobile-nav-link">Contact</a></li>
+        </ul>
+    </div>
+
+    <main>
+        <!-- Section 1: Hero -->
+        <section class="section hero" id="hero" aria-labelledby="hero-title">
+            <div class="hero-background">
+                <div class="hero-gradient"></div>
+            </div>
+            
+            <div class="hero-content">
+                <span class="hero-tagline" data-animate="fade-down">Software Engineer & Builder</span>
+                <h1 class="hero-title" id="hero-title" data-animate="fade-up">Aishat Adewoyin</h1>
+                <p class="hero-subtitle" data-animate="fade-up">
+                    I design calm, high-performing systems and interfaces.
+                    Building real products with real impact.
+                </p>
+                
+                <div class="hero-cta" data-animate="fade-up">
+                    <a href="#projects" class="btn btn-primary">See My Work</a>
+                    <a href="#blog" class="btn btn-secondary">Read My Blog</a>
+                </div>
+                
+                <!-- <span class="scroll-hint" data-animate="fade-in">Scroll to explore</span> -->
+            </div>
+        </section>
+
+        <!-- Section 2: Projects (GitHub) -->
+        <section class="section projects" id="projects" aria-labelledby="projects-title">
+            <div class="section-container">
+                <div class="section-header">
+                    <h2 class="section-title" id="projects-title" data-animate="fade-right">Selected Work</h2>
+                    <div class="accent-rule" data-animate="scale-x"></div>
+                    <a href="https://github.com/aishatadewoyin" target="_blank" rel="noopener noreferrer" class="section-link" data-animate="fade-in">
+                        View all on GitHub →
+                    </a>
+                </div>
+                
+                <div class="projects-grid" id="projects-grid">
+                    <!-- Projects will be loaded here via GitHub API -->
+                    <div class="project-card project-card-large loading-skeleton" data-animate="fade-right">
+                        <div class="skeleton-content">
+                            <div class="skeleton-title"></div>
+                            <div class="skeleton-text"></div>
+                            <div class="skeleton-text short"></div>
+                        </div>
+                    </div>
+                    <div class="project-card loading-skeleton" data-animate="fade-left">
+                        <div class="skeleton-content">
+                            <div class="skeleton-title"></div>
+                            <div class="skeleton-text"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="projects-error" id="projects-error" style="display: none;">
+                    <p>Unable to load projects. Please visit my <a href="https://github.com/aishatadewoyin" target="_blank" rel="noopener noreferrer">GitHub profile</a>.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 3: About -->
+        <section class="section about" id="about" aria-labelledby="about-title">
+            <div class="section-container">
+                <div class="about-grid">
+                    <div class="about-content">
+                        <h2 class="section-title" id="about-title" data-animate="fade-right">About</h2>
+                        <div class="accent-rule" data-animate="scale-x"></div>
+                        
+                        <div class="about-text" data-animate="fade-up">
+                            <p>
+                                I'm a software engineer who loves the craft of building: clean architecture, 
+                                thoughtful UI, and calm user experiences. I specialize in Python, FastAPI, 
+                                and PostgreSQL—building robust backends that power seamless frontend experiences.
+                            </p>
+                            <p>
+                                Currently, I'm building three real projects: <strong>Chronicles of a Polymath</strong> 
+                                (my personal blog), <strong>Maison of Aisha</strong> (a fashion e-commerce brand), 
+                                and this portfolio. Each project reflects my belief that technology should be 
+                                both powerful and beautiful.
+                            </p>
+                            <p>
+                                Beyond code, I run <strong>CuriousBytes by Aisha</strong>, a YouTube channel 
+                                focused on e-commerce and importation, sharing practical knowledge from my 
+                                entrepreneurial journey.
+                            </p>
+                        </div>
+                        
+                        <a href="#blog" class="about-link" data-animate="fade-up">
+                            Read the full story →
+                        </a>
+                    </div>
+                    
+                    <div class="about-image-wrapper" data-animate="fade-left">
+                        <div class="about-image">
+                            <div class="about-image-placeholder">
+                                <span class="about-initials">A</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 4: YouTube -->
+        <section class="section youtube" id="youtube" aria-labelledby="youtube-title">
+            <div class="section-container">
+                <div class="youtube-grid">
+                    <div class="youtube-content">
+                        <span class="section-label" data-animate="fade-down">YouTube</span>
+                        <h2 class="section-title" id="youtube-title" data-animate="fade-right">CuriousBytes</h2>
+                        
+                        <p class="youtube-description" data-animate="fade-up">
+                            Short, practical videos on building products, design decisions, and shipping faster. 
+                            I share insights from my journey in e-commerce, importation, and software development.
+                        </p>
+                        
+                        <a href="https://youtube.com/@CuriousBytesByAisha" target="_blank" rel="noopener noreferrer" class="btn btn-primary" data-animate="fade-up">
+                            Watch on YouTube
+                        </a>
+                    </div>
+                    
+                    <div class="youtube-videos" id="youtube-videos">
+                        <!-- Videos will be loaded here via YouTube API -->
+                        <div class="video-card loading-skeleton" data-animate="fade-left">
+                            <div class="skeleton-thumbnail"></div>
+                            <div class="skeleton-content">
+                                <div class="skeleton-title"></div>
+                                <div class="skeleton-text short"></div>
+                            </div>
+                        </div>
+                        <div class="video-card loading-skeleton" data-animate="fade-left">
+                            <div class="skeleton-thumbnail"></div>
+                            <div class="skeleton-content">
+                                <div class="skeleton-title"></div>
+                                <div class="skeleton-text short"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="youtube-error" id="youtube-error" style="display: none;">
+                    <p>Unable to load videos. Please visit my <a href="https://youtube.com" target="_blank" rel="noopener noreferrer">YouTube channel</a>.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 5: Blog -->
+        <section class="section blog" id="blog" aria-labelledby="blog-title">
+            <div class="section-container">
+                <div class="section-header">
+                    <div>
+                        <h2 class="section-title" id="blog-title" data-animate="fade-right">Latest from the Blog</h2>
+                        <div class="accent-rule" data-animate="scale-x"></div>
+                    </div>
+                    <a href="https://chroniclesofapolymath.com" target="_blank" rel="noopener noreferrer" class="section-link" data-animate="fade-in">
+                        Visit Chronicles of a Polymath →
+                    </a>
+                </div>
+                
+                <div class="blog-grid">
+                    <article class="blog-card" data-animate="fade-up">
+                        <div class="blog-card-content">
+                            <span class="blog-date">March 15, 2024</span>
+                            <h3 class="blog-card-title">Building a Fashion E-commerce Platform from Scratch</h3>
+                            <p class="blog-excerpt">
+                                The journey of creating Maison of Aisha—lessons learned in product design, 
+                                payment integration, and the art of launching.
+                            </p>
+                            <a href="#" class="blog-read-more">Read More →</a>
+                        </div>
+                    </article>
+                    
+                    <article class="blog-card" data-animate="fade-up">
+                        <div class="blog-card-content">
+                            <span class="blog-date">February 28, 2024</span>
+                            <h3 class="blog-card-title">Why I Chose FastAPI for My Backend</h3>
+                            <p class="blog-excerpt">
+                                A deep dive into Python's modern web framework and how it helped me build 
+                                performant APIs with minimal boilerplate.
+                            </p>
+                            <a href="#" class="blog-read-more">Read More →</a>
+                        </div>
+                    </article>
+                    
+                    <article class="blog-card" data-animate="fade-up">
+                        <div class="blog-card-content">
+                            <span class="blog-date">January 10, 2024</span>
+                            <h3 class="blog-card-title">The Polymath Mindset: Learning Across Disciplines</h3>
+                            <p class="blog-excerpt">
+                                How curiosity in multiple fields—tech, fashion, business—fuels creativity 
+                                and leads to unique solutions.
+                            </p>
+                            <a href="#" class="blog-read-more">Read More →</a>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 6: Contact -->
+        <section class="section contact" id="contact" aria-labelledby="contact-title">
+            <div class="section-container">
+                <div class="contact-content">
+                    <h2 class="contact-title" id="contact-title" data-animate="fade-up">Let's build something calm.</h2>
+                    <p class="contact-subtitle" data-animate="fade-up">
+                        Tell me what you're making. I'll reply within two business days.
+                    </p>
+                    
+                    <a href="mailto:hello@aisha.dev" class="btn btn-primary btn-large" data-animate="fade-up">
+                        Email Aisha
+                    </a>
+                    
+                    <div class="social-links" data-animate="fade-up">
+                        <a href="https://github.com/USERNAME" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="GitHub">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+                            </svg>
+                        </a>
+                        <a href="https://youtube.com/@CuriousBytesByAisha" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="YouTube">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"></path>
+                                <polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"></polygon>
+                            </svg>
+                        </a>
+                        <a href="https://linkedin.com/in/USERNAME" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="LinkedIn">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
+                                <rect x="2" y="9" width="4" height="12"></rect>
+                                <circle cx="4" cy="4" r="2"></circle>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+                
+                <footer class="footer">
+                    <p class="footer-text">© Aisha — Built with care.</p>
+                </footer>
+            </div>
+        </section>
+    </main>
+
+    <!-- Scripts -->
+    <script src="main.js"></script>
+</body>
+</html>
