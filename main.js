@@ -139,6 +139,86 @@ function initScrollAnimations() {
 }
 
 // ============================================
+// LANGUAGES PROGRESS ANIMATION
+// ============================================
+
+function initLanguageProgress() {
+    const languageCards = document.querySelectorAll('.language-card');
+    if (languageCards.length === 0) return;
+
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    languageCards.forEach((card) => {
+        const percentEl = card.querySelector('.language-percent');
+        const barEl = card.querySelector('.language-bar');
+        const fillEl = card.querySelector('.language-fill');
+
+        if (!percentEl || !barEl || !fillEl) return;
+
+        const target = Number.parseInt(barEl.getAttribute('aria-valuenow') || '0', 10);
+
+        if (reduceMotion) {
+            fillEl.style.width = `${target}%`;
+            percentEl.textContent = `${target}%`;
+            return;
+        }
+
+        // Start from 0 so the count and bar can animate in quickly.
+        fillEl.style.width = '0%';
+        percentEl.textContent = '0%';
+    });
+
+    if (reduceMotion) return;
+
+    let hasAnimated = false;
+    const section = document.getElementById('languages');
+    if (!section) return;
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+            if (!entry.isIntersecting || hasAnimated) return;
+
+            hasAnimated = true;
+
+            languageCards.forEach((card, index) => {
+                const percentEl = card.querySelector('.language-percent');
+                const barEl = card.querySelector('.language-bar');
+                const fillEl = card.querySelector('.language-fill');
+                if (!percentEl || !barEl || !fillEl) return;
+
+                const target = Number.parseInt(barEl.getAttribute('aria-valuenow') || '0', 10);
+                const duration = 550;
+                const startTime = performance.now() + index * 55;
+
+                fillEl.style.width = `${target}%`;
+
+                function updateCounter(now) {
+                    if (now < startTime) {
+                        window.requestAnimationFrame(updateCounter);
+                        return;
+                    }
+
+                    const elapsed = now - startTime;
+                    const progress = Math.min(elapsed / duration, 1);
+                    const value = Math.round(progress * target);
+                    percentEl.textContent = `${value}%`;
+
+                    if (progress < 1) {
+                        window.requestAnimationFrame(updateCounter);
+                    }
+                }
+
+                window.requestAnimationFrame(updateCounter);
+            });
+
+            observer.unobserve(section);
+        });
+    }, { threshold: 0.25 });
+
+    observer.observe(section);
+}
+
+// ============================================
 // GITHUB API - FETCH PINNED REPOSITORIES
 // ============================================
 
@@ -483,6 +563,7 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // Initialize scroll animations
     initScrollAnimations();
+    initLanguageProgress();
     
     // Fetch API data
     fetchGitHubRepos();

@@ -718,6 +718,67 @@ img {
 }
 
 /* ============================================
+   LANGUAGES SECTION
+   ============================================ */
+.languages {
+    background-color: var(--bg-primary);
+}
+
+.languages-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.5rem;
+}
+
+.language-card {
+    background-color: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: var(--radius-card);
+    padding: 1.35rem 1.5rem;
+}
+
+.language-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 0.75rem;
+}
+
+.language-name {
+    font-family: var(--font-sans);
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: var(--text-primary);
+}
+
+.language-percent {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--accent);
+}
+
+.language-bar {
+    width: 100%;
+    height: 10px;
+    border-radius: 999px;
+    overflow: hidden;
+    background-color: rgba(247, 242, 234, 0.08);
+    border: 1px solid rgba(247, 242, 234, 0.1);
+}
+
+.language-fill {
+    display: block;
+    width: 0;
+    height: 100%;
+    background: linear-gradient(90deg, #B97D3C 0%, var(--accent) 55%, #E5B567 100%);
+    transition: width 0.55s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+/* ============================================
    YOUTUBE SECTION
    ============================================ */
 .youtube {
@@ -1101,6 +1162,10 @@ img {
         grid-template-columns: 1fr;
         gap: 3rem;
     }
+
+    .languages-grid {
+        grid-template-columns: 1fr;
+    }
     
     .about-image-wrapper {
         order: -1;
@@ -1204,6 +1269,10 @@ img {
     .social-link {
         width: 44px;
         height: 44px;
+    }
+
+    .language-card {
+        padding: 1.2rem;
     }
 }
 
