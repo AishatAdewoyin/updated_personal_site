@@ -676,6 +676,16 @@ img {
     font-weight: 500;
 }
 
+.about-text a {
+    color: #d4a056;
+    text-decoration: none;
+}
+
+.about-text a:hover {
+    color: #e5b567;
+    text-decoration: none;
+}
+
 .about-link {
     font-family: var(--font-mono);
     font-size: 0.75rem;
@@ -1084,7 +1094,7 @@ img {
 /* Footer */
 .footer {
     text-align: center;
-    padding: 0.9rem 0;
+    padding: 0.7rem 0;
     border-top: 1px solid rgba(43, 15, 28, 0.1);
 }
 
