@@ -1084,15 +1084,32 @@ img {
 /* Footer */
 .footer {
     text-align: center;
-    padding: 2rem 0;
+    padding: 0.9rem 0;
     border-top: 1px solid rgba(43, 15, 28, 0.1);
 }
 
 .footer-text {
     font-family: var(--font-mono);
-    font-size: 0.7rem;
+    font-size: 0.62rem;
     color: rgba(43, 15, 28, 0.5);
     letter-spacing: 0.05em;
+}
+
+.footer-credit-link {
+    font-family: var(--font-serif);
+    font-size: 1.05rem;
+    font-weight: 600;
+    letter-spacing: 0.01em;
+    color: #8f2f53;
+    text-decoration: none;
+    border-bottom: 1px solid rgba(143, 47, 83, 0.35);
+    transition: color var(--transition-fast), border-color var(--transition-fast), text-shadow var(--transition-fast);
+}
+
+.footer-credit-link:hover {
+    color: #d4a056;
+    border-color: rgba(212, 160, 86, 0.55);
+    text-shadow: 0 2px 12px rgba(212, 160, 86, 0.25);
 }
 
 /* ============================================
