@@ -8,9 +8,14 @@ const SELECTED_GITHUB_REPOS = [
     'CitiGuide',
 ];
 
-// YouTube Configuration  
-const YOUTUBE_API_KEY = 'YOUR_API_KEY_HERE';
-const YOUTUBE_CHANNEL_ID = 'CuriousBytesByAisha';
+// Optional deployed website URLs keyed by repository name (lowercase).
+// Example: 'portfolio': 'https://your-live-site.com'
+const DEPLOYED_SITE_URLS = {
+};
+
+// YouTube Configuration (secure mode via backend proxy)
+const YOUTUBE_CHANNEL_HANDLE = '@curiousbytesbyaisha';
+const YOUTUBE_PROXY_ENDPOINT = '/api/youtube-latest';
 
 // ============================================
 // DOM ELEMENTS
@@ -315,6 +320,8 @@ function renderProjects(repos) {
     const projectsHTML = repos.map((repo, index) => {
         const isLarge = index === 0;
         const languageColor = languageColors[repo.language] || '#D4A056';
+        const websiteUrl = DEPLOYED_SITE_URLS[repo.name.toLowerCase()] || repo.homepage || '#';
+        const hasWebsite = websiteUrl !== '#';
         
         return `
             <article class="project-card ${isLarge ? 'project-card-large' : ''}" data-animate="${isLarge ? 'fade-right' : 'fade-left'}">
@@ -336,9 +343,14 @@ function renderProjects(repos) {
                         </span>
                     </div>
                 </div>
-                <a href="${repo.html_url}" target="_blank" rel="noopener noreferrer" class="project-link">
-                    View on GitHub →
-                </a>
+                <div class="project-links">
+                    <a href="${repo.html_url}" target="_blank" rel="noopener noreferrer" class="project-link">
+                        View on GitHub →
+                    </a>
+                    <a href="${websiteUrl}" ${hasWebsite ? 'target="_blank" rel="noopener noreferrer"' : ''} class="project-link${hasWebsite ? '' : ' project-link-disabled'}" ${hasWebsite ? '' : 'aria-disabled="true"'}>
+                        Visit Website →
+                    </a>
+                </div>
             </article>
         `;
     }).join('');
@@ -380,7 +392,10 @@ function showGitHubFallback() {
                     </span>
                 </div>
             </div>
-            <a href="#" class="project-link">View Project →</a>
+            <div class="project-links">
+                <a href="#" class="project-link">View on GitHub →</a>
+                <a href="#" class="project-link">Visit Website →</a>
+            </div>
         </article>
         <article class="project-card" data-animate="fade-left">
             <div class="project-header">
@@ -399,7 +414,10 @@ function showGitHubFallback() {
                     </span>
                 </div>
             </div>
-            <a href="#" class="project-link">View Project →</a>
+            <div class="project-links">
+                <a href="#" class="project-link">View on GitHub →</a>
+                <a href="#" class="project-link">Visit Website →</a>
+            </div>
         </article>
     `;
 }
@@ -420,20 +438,19 @@ async function fetchYouTubeVideos() {
     const videosContainer = document.getElementById('youtube-videos');
     const youtubeError = document.getElementById('youtube-error');
     
-    // Don't try to fetch if API key is not set
-    if (YOUTUBE_API_KEY === 'YOUR_API_KEY_HERE' || YOUTUBE_CHANNEL_ID === 'YOUR_CHANNEL_ID_HERE') {
+    if (!YOUTUBE_CHANNEL_HANDLE || YOUTUBE_CHANNEL_HANDLE === 'YOUR_CHANNEL_HANDLE_HERE') {
         showYouTubeFallback();
         return;
     }
 
     try {
-        // Fetches latest videos from channel
+        const handle = YOUTUBE_CHANNEL_HANDLE.replace('@', '').trim();
         const response = await fetch(
-            `https://www.googleapis.com/youtube/v3/search?key=${YOUTUBE_API_KEY}&channelId=${YOUTUBE_CHANNEL_ID}&part=snippet,id&order=date&maxResults=3&type=video`
+            `${YOUTUBE_PROXY_ENDPOINT}?handle=${encodeURIComponent(handle)}&maxResults=3`
         );
         
         if (!response.ok) {
-            throw new Error(`YouTube API error: ${response.status}`);
+            throw new Error(`YouTube proxy error: ${response.status}`);
         }
         
         const data = await response.json();
@@ -447,6 +464,9 @@ async function fetchYouTubeVideos() {
         
     } catch (error) {
         console.error('Error fetching YouTube videos:', error);
+        if (youtubeError) {
+            youtubeError.style.display = 'block';
+        }
         showYouTubeFallback();
     }
 }
