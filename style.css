@@ -1027,7 +1027,7 @@ img {
     display: flex;
     justify-content: center;
     gap: 1.5rem;
-    margin-top: 3rem;
+    margin: 2.25rem 0 2rem;
 }
 
 .social-link {
@@ -1037,8 +1037,9 @@ img {
     align-items: center;
     justify-content: center;
     border-radius: 50%;
-    border: 1px solid rgba(43, 15, 28, 0.2);
+    border: 1.5px solid currentColor;
     color: var(--text-dark);
+    background-color: transparent;
     transition: all var(--transition-medium);
 }
 
@@ -1047,11 +1048,37 @@ img {
     height: 20px;
 }
 
+.social-link-github {
+    background-color: #1f2937;
+    color: #ffffff;
+}
+
+.social-link-youtube {
+    background-color: #ff0000;
+    color: #ffffff;
+}
+
+.social-link-linkedin {
+    background-color: #0a66c2;
+    color: #ffffff;
+}
+
 .social-link:hover {
-    background-color: var(--text-dark);
-    border-color: var(--text-dark);
-    color: var(--bg-secondary);
+    background-color: transparent;
+    border-color: currentColor;
     transform: translateY(-2px);
+}
+
+.social-link-github:hover {
+    color: #1f2937;
+}
+
+.social-link-youtube:hover {
+    color: #ff0000;
+}
+
+.social-link-linkedin:hover {
+    color: #0a66c2;
 }
 
 /* Footer */

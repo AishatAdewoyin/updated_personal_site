@@ -5,7 +5,7 @@ const SELECTED_GITHUB_REPOS = [
     'Albert-einstein-biography',
     'banking-system',
     'azkasplace',
-    'CitiGuide',
+    'chroniclesofapolymath',
 ];
 
 // Optional deployed website URLs keyed by repository name (lowercase).
@@ -17,18 +17,18 @@ const DEPLOYED_SITE_URLS = {
 const YOUTUBE_CHANNEL_URL = 'https://youtube.com/@CuriousBytesByAisha';
 const YOUTUBE_VIDEOS = [
     {
-        url: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
-        title: 'Replace with your video title',
+        url: 'https://youtu.be/gdBl3vwuHrU?si=mruMlYAKey9YnFpP',
+        title: 'How To Ship Your Product From China to Nigeria/Ghana',
         publishedAt: '2026-03-01',
     },
     {
-        url: 'https://www.youtube.com/watch?v=3JZ_D3ELwOQ',
-        title: 'Replace with your second video title',
+        url: 'https://youtu.be/suKQIgPEN1M?si=bvJwrYxrIFlQPckX',
+        title: 'How To Sign Up for Alipay Account as a Nigeria (Part 1)',
         publishedAt: '2026-02-20',
     },
     {
-        url: 'https://www.youtube.com/watch?v=l482T0yNkeo',
-        title: 'Replace with your third video title',
+        url: 'https://youtu.be/9rbFdb269Go?si=LILR2dIEjXNdKF5M',
+        title: 'How To Copy Your Alipay Account Number',
         publishedAt: '2026-02-10',
     },
 ];
