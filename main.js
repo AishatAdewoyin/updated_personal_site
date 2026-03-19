@@ -13,9 +13,25 @@ const SELECTED_GITHUB_REPOS = [
 const DEPLOYED_SITE_URLS = {
 };
 
-// YouTube Configuration (secure mode via backend proxy)
-const YOUTUBE_CHANNEL_HANDLE = '@curiousbytesbyaisha';
-const YOUTUBE_PROXY_ENDPOINT = '/api/youtube-latest';
+// YouTube Configuration (manual URLs only)
+const YOUTUBE_CHANNEL_URL = 'https://youtube.com/@CuriousBytesByAisha';
+const YOUTUBE_VIDEOS = [
+    {
+        url: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+        title: 'Replace with your video title',
+        publishedAt: '2026-03-01',
+    },
+    {
+        url: 'https://www.youtube.com/watch?v=3JZ_D3ELwOQ',
+        title: 'Replace with your second video title',
+        publishedAt: '2026-02-20',
+    },
+    {
+        url: 'https://www.youtube.com/watch?v=l482T0yNkeo',
+        title: 'Replace with your third video title',
+        publishedAt: '2026-02-10',
+    },
+];
 
 // ============================================
 // DOM ELEMENTS
@@ -431,64 +447,48 @@ function showGitHubError() {
 }
 
 // ============================================
-// YOUTUBE API - FETCH LATEST VIDEOS
+// YOUTUBE - RENDER MANUAL VIDEOS
 // ============================================
 
-async function fetchYouTubeVideos() {
-    const videosContainer = document.getElementById('youtube-videos');
+function renderYouTubeVideos() {
     const youtubeError = document.getElementById('youtube-error');
-    
-    if (!YOUTUBE_CHANNEL_HANDLE || YOUTUBE_CHANNEL_HANDLE === 'YOUR_CHANNEL_HANDLE_HERE') {
+
+    if (!Array.isArray(YOUTUBE_VIDEOS) || YOUTUBE_VIDEOS.length === 0) {
         showYouTubeFallback();
         return;
     }
 
-    try {
-        const handle = YOUTUBE_CHANNEL_HANDLE.replace('@', '').trim();
-        const response = await fetch(
-            `${YOUTUBE_PROXY_ENDPOINT}?handle=${encodeURIComponent(handle)}&maxResults=3`
-        );
-        
-        if (!response.ok) {
-            throw new Error(`YouTube proxy error: ${response.status}`);
-        }
-        
-        const data = await response.json();
-        
-        if (!data.items || data.items.length === 0) {
-            showYouTubeFallback();
-            return;
-        }
-        
-        renderVideos(data.items);
-        
-    } catch (error) {
-        console.error('Error fetching YouTube videos:', error);
-        if (youtubeError) {
-            youtubeError.style.display = 'block';
-        }
-        showYouTubeFallback();
+    renderVideos(YOUTUBE_VIDEOS.slice(0, 3));
+
+    if (youtubeError) {
+        youtubeError.style.display = 'none';
     }
 }
 
 function renderVideos(videos) {
     const videosContainer = document.getElementById('youtube-videos');
     
-    const videosHTML = videos.map((video, index) => {
-        const videoId = video.id.videoId;
-        const title = video.snippet.title;
-        const thumbnail = video.snippet.thumbnails.medium?.url || video.snippet.thumbnails.default?.url;
-        const publishedAt = new Date(video.snippet.publishedAt);
-        const formattedDate = publishedAt.toLocaleDateString('en-US', {
-            year: 'numeric',
-            month: 'long',
-            day: 'numeric'
-        });
+    const videosHTML = videos.map((video) => {
+        const title = video.title || 'Watch this video';
+        const videoId = extractYouTubeVideoId(video.url || '');
+        const thumbnail = video.thumbnail || (videoId ? `https://i.ytimg.com/vi/${videoId}/mqdefault.jpg` : '');
+        const rawDate = video.publishedAt ? new Date(video.publishedAt) : null;
+        const formattedDate = rawDate && !Number.isNaN(rawDate.getTime())
+            ? rawDate.toLocaleDateString('en-US', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric'
+            })
+            : '';
+
+        if (!video.url || !videoId) return '';
         
         return `
-            <a href="https://youtube.com/watch?v=${videoId}" target="_blank" rel="noopener noreferrer" class="video-card" data-animate="fade-left">
+            <a href="${video.url}" target="_blank" rel="noopener noreferrer" class="video-card" data-animate="fade-left">
                 <div class="video-thumbnail">
-                    <img src="${thumbnail}" alt="${escapeHtml(title)}" loading="lazy">
+                    ${thumbnail
+                        ? `<img src="${thumbnail}" alt="${escapeHtml(title)}" loading="lazy">`
+                        : `<div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#3D1526,#2B0F1C);"></div>`}
                 </div>
                 <div class="video-info">
                     <h3 class="video-title">${escapeHtml(title)}</h3>
@@ -496,7 +496,12 @@ function renderVideos(videos) {
                 </div>
             </a>
         `;
-    }).join('');
+    }).filter(Boolean).join('');
+
+    if (!videosHTML) {
+        showYouTubeFallback();
+        return;
+    }
     
     videosContainer.innerHTML = videosHTML;
     
@@ -518,7 +523,7 @@ function showYouTubeFallback() {
     const videosContainer = document.getElementById('youtube-videos');
     
     videosContainer.innerHTML = `
-        <a href="https://youtube.com/@CuriousBytesByAisha" target="_blank" rel="noopener noreferrer" class="video-card" data-animate="fade-left">
+        <a href="${YOUTUBE_CHANNEL_URL}" target="_blank" rel="noopener noreferrer" class="video-card" data-animate="fade-left">
             <div class="video-thumbnail">
                 <div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#3D1526,#2B0F1C);">
                     <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#D4A056" stroke-width="1.5">
@@ -532,7 +537,7 @@ function showYouTubeFallback() {
                 <span class="video-date">March 10, 2024</span>
             </div>
         </a>
-        <a href="https://youtube.com/@CuriousBytesByAisha" target="_blank" rel="noopener noreferrer" class="video-card" data-animate="fade-left">
+        <a href="${YOUTUBE_CHANNEL_URL}" target="_blank" rel="noopener noreferrer" class="video-card" data-animate="fade-left">
             <div class="video-thumbnail">
                 <div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#3D1526,#2B0F1C);">
                     <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#D4A056" stroke-width="1.5">
@@ -562,6 +567,26 @@ function showYouTubeFallback() {
     newAnimatedElements.forEach(el => observer.observe(el));
 }
 
+    function extractYouTubeVideoId(url) {
+        if (typeof url !== 'string' || !url) return null;
+
+        const patterns = [
+            /(?:youtube\.com\/watch\?v=)([\w-]{11})/,
+            /(?:youtu\.be\/)([\w-]{11})/,
+            /(?:youtube\.com\/shorts\/)([\w-]{11})/,
+            /(?:youtube\.com\/embed\/)([\w-]{11})/
+        ];
+
+        for (const pattern of patterns) {
+            const match = url.match(pattern);
+            if (match && match[1]) {
+                return match[1];
+            }
+        }
+
+        return null;
+    }
+
 // ============================================
 // UTILITY FUNCTIONS
 // ============================================
@@ -588,11 +613,11 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // Fetch API data
     fetchGitHubRepos();
-    fetchYouTubeVideos();
+    renderYouTubeVideos();
     
     // Log helpful message for setup
     console.log('%c👋 Hello! Aisha here.', 'color: #D4A056; font-size: 16px; font-weight: bold;');
-    console.log('%cTo enable GitHub and YouTube integrations, update the API configuration in main.js', 'color: #C9B8A6;');
+    console.log('%cTo update GitHub and YouTube content, edit the configuration in main.js', 'color: #C9B8A6;');
 });
 
 // Handle visibility change for performance
