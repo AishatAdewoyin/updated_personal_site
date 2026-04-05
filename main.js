@@ -450,142 +450,142 @@ function showGitHubError() {
 // YOUTUBE - RENDER MANUAL VIDEOS
 // ============================================
 
-function renderYouTubeVideos() {
-    const youtubeError = document.getElementById('youtube-error');
+// function renderYouTubeVideos() {
+//     const youtubeError = document.getElementById('youtube-error');
 
-    if (!Array.isArray(YOUTUBE_VIDEOS) || YOUTUBE_VIDEOS.length === 0) {
-        showYouTubeFallback();
-        return;
-    }
+//     if (!Array.isArray(YOUTUBE_VIDEOS) || YOUTUBE_VIDEOS.length === 0) {
+//         showYouTubeFallback();
+//         return;
+//     }
 
-    renderVideos(YOUTUBE_VIDEOS.slice(0, 3));
+//     renderVideos(YOUTUBE_VIDEOS.slice(0, 3));
 
-    if (youtubeError) {
-        youtubeError.style.display = 'none';
-    }
-}
+//     if (youtubeError) {
+//         youtubeError.style.display = 'none';
+//     }
+// }
 
-function renderVideos(videos) {
-    const videosContainer = document.getElementById('youtube-videos');
+// function renderVideos(videos) {
+//     const videosContainer = document.getElementById('youtube-videos');
     
-    const videosHTML = videos.map((video) => {
-        const title = video.title || 'Watch this video';
-        const videoId = extractYouTubeVideoId(video.url || '');
-        const thumbnail = video.thumbnail || (videoId ? `https://i.ytimg.com/vi/${videoId}/mqdefault.jpg` : '');
-        const rawDate = video.publishedAt ? new Date(video.publishedAt) : null;
-        const formattedDate = rawDate && !Number.isNaN(rawDate.getTime())
-            ? rawDate.toLocaleDateString('en-US', {
-                year: 'numeric',
-                month: 'long',
-                day: 'numeric'
-            })
-            : '';
+//     const videosHTML = videos.map((video) => {
+//         const title = video.title || 'Watch this video';
+//         const videoId = extractYouTubeVideoId(video.url || '');
+//         const thumbnail = video.thumbnail || (videoId ? `https://i.ytimg.com/vi/${videoId}/mqdefault.jpg` : '');
+//         const rawDate = video.publishedAt ? new Date(video.publishedAt) : null;
+//         const formattedDate = rawDate && !Number.isNaN(rawDate.getTime())
+//             ? rawDate.toLocaleDateString('en-US', {
+//                 year: 'numeric',
+//                 month: 'long',
+//                 day: 'numeric'
+//             })
+//             : '';
 
-        if (!video.url || !videoId) return '';
+//         if (!video.url || !videoId) return '';
         
-        return `
-            <a href="${video.url}" target="_blank" rel="noopener noreferrer" class="video-card" data-animate="fade-left">
-                <div class="video-thumbnail">
-                    ${thumbnail
-                        ? `<img src="${thumbnail}" alt="${escapeHtml(title)}" loading="lazy">`
-                        : `<div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#3D1526,#2B0F1C);"></div>`}
-                </div>
-                <div class="video-info">
-                    <h3 class="video-title">${escapeHtml(title)}</h3>
-                    <span class="video-date">${formattedDate}</span>
-                </div>
-            </a>
-        `;
-    }).filter(Boolean).join('');
+//         return `
+//             <a href="${video.url}" target="_blank" rel="noopener noreferrer" class="video-card" data-animate="fade-left">
+//                 <div class="video-thumbnail">
+//                     ${thumbnail
+//                         ? `<img src="${thumbnail}" alt="${escapeHtml(title)}" loading="lazy">`
+//                         : `<div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#3D1526,#2B0F1C);"></div>`}
+//                 </div>
+//                 <div class="video-info">
+//                     <h3 class="video-title">${escapeHtml(title)}</h3>
+//                     <span class="video-date">${formattedDate}</span>
+//                 </div>
+//             </a>
+//         `;
+//     }).filter(Boolean).join('');
 
-    if (!videosHTML) {
-        showYouTubeFallback();
-        return;
-    }
+//     if (!videosHTML) {
+//         showYouTubeFallback();
+//         return;
+//     }
     
-    videosContainer.innerHTML = videosHTML;
+//     videosContainer.innerHTML = videosHTML;
     
-    // Re-initializes animations for new elements
-    const newAnimatedElements = videosContainer.querySelectorAll('[data-animate]');
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('animated');
-                observer.unobserve(entry.target);
-            }
-        });
-    }, { threshold: 0.1 });
+//     // Re-initializes animations for new elements
+//     const newAnimatedElements = videosContainer.querySelectorAll('[data-animate]');
+//     const observer = new IntersectionObserver((entries) => {
+//         entries.forEach(entry => {
+//             if (entry.isIntersecting) {
+//                 entry.target.classList.add('animated');
+//                 observer.unobserve(entry.target);
+//             }
+//         });
+//     }, { threshold: 0.1 });
     
-    newAnimatedElements.forEach(el => observer.observe(el));
-}
+//     newAnimatedElements.forEach(el => observer.observe(el));
+// }
 
-function showYouTubeFallback() {
-    const videosContainer = document.getElementById('youtube-videos');
+// function showYouTubeFallback() {
+//     const videosContainer = document.getElementById('youtube-videos');
     
-    videosContainer.innerHTML = `
-        <a href="${YOUTUBE_CHANNEL_URL}" target="_blank" rel="noopener noreferrer" class="video-card" data-animate="fade-left">
-            <div class="video-thumbnail">
-                <div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#3D1526,#2B0F1C);">
-                    <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#D4A056" stroke-width="1.5">
-                        <path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"></path>
-                        <polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02" fill="#D4A056"></polygon>
-                    </svg>
-                </div>
-            </div>
-            <div class="video-info">
-                <h3 class="video-title">Getting Started with E-commerce Importation</h3>
-                <span class="video-date">March 10, 2024</span>
-            </div>
-        </a>
-        <a href="${YOUTUBE_CHANNEL_URL}" target="_blank" rel="noopener noreferrer" class="video-card" data-animate="fade-left">
-            <div class="video-thumbnail">
-                <div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#3D1526,#2B0F1C);">
-                    <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#D4A056" stroke-width="1.5">
-                        <path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"></path>
-                        <polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02" fill="#D4A056"></polygon>
-                    </svg>
-                </div>
-            </div>
-            <div class="video-info">
-                <h3 class="video-title">Building a Fashion Brand Online</h3>
-                <span class="video-date">February 25, 2024</span>
-            </div>
-        </a>
-    `;
+//     videosContainer.innerHTML = `
+//         <a href="${YOUTUBE_CHANNEL_URL}" target="_blank" rel="noopener noreferrer" class="video-card" data-animate="fade-left">
+//             <div class="video-thumbnail">
+//                 <div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#3D1526,#2B0F1C);">
+//                     <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#D4A056" stroke-width="1.5">
+//                         <path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"></path>
+//                         <polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02" fill="#D4A056"></polygon>
+//                     </svg>
+//                 </div>
+//             </div>
+//             <div class="video-info">
+//                 <h3 class="video-title">Getting Started with E-commerce Importation</h3>
+//                 <span class="video-date">March 10, 2024</span>
+//             </div>
+//         </a>
+//         <a href="${YOUTUBE_CHANNEL_URL}" target="_blank" rel="noopener noreferrer" class="video-card" data-animate="fade-left">
+//             <div class="video-thumbnail">
+//                 <div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#3D1526,#2B0F1C);">
+//                     <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#D4A056" stroke-width="1.5">
+//                         <path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"></path>
+//                         <polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02" fill="#D4A056"></polygon>
+//                     </svg>
+//                 </div>
+//             </div>
+//             <div class="video-info">
+//                 <h3 class="video-title">Building a Fashion Brand Online</h3>
+//                 <span class="video-date">February 25, 2024</span>
+//             </div>
+//         </a>
+//     `;
     
-    // Re-initialize animations
-    const newAnimatedElements = videosContainer.querySelectorAll('[data-animate]');
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('animated');
-                observer.unobserve(entry.target);
-            }
-        });
-    }, { threshold: 0.1 });
+//     // Re-initialize animations
+//     const newAnimatedElements = videosContainer.querySelectorAll('[data-animate]');
+//     const observer = new IntersectionObserver((entries) => {
+//         entries.forEach(entry => {
+//             if (entry.isIntersecting) {
+//                 entry.target.classList.add('animated');
+//                 observer.unobserve(entry.target);
+//             }
+//         });
+//     }, { threshold: 0.1 });
     
-    newAnimatedElements.forEach(el => observer.observe(el));
-}
+//     newAnimatedElements.forEach(el => observer.observe(el));
+// }
 
-    function extractYouTubeVideoId(url) {
-        if (typeof url !== 'string' || !url) return null;
+//     function extractYouTubeVideoId(url) {
+//         if (typeof url !== 'string' || !url) return null;
 
-        const patterns = [
-            /(?:youtube\.com\/watch\?v=)([\w-]{11})/,
-            /(?:youtu\.be\/)([\w-]{11})/,
-            /(?:youtube\.com\/shorts\/)([\w-]{11})/,
-            /(?:youtube\.com\/embed\/)([\w-]{11})/
-        ];
+//         const patterns = [
+//             /(?:youtube\.com\/watch\?v=)([\w-]{11})/,
+//             /(?:youtu\.be\/)([\w-]{11})/,
+//             /(?:youtube\.com\/shorts\/)([\w-]{11})/,
+//             /(?:youtube\.com\/embed\/)([\w-]{11})/
+//         ];
 
-        for (const pattern of patterns) {
-            const match = url.match(pattern);
-            if (match && match[1]) {
-                return match[1];
-            }
-        }
+//         for (const pattern of patterns) {
+//             const match = url.match(pattern);
+//             if (match && match[1]) {
+//                 return match[1];
+//             }
+//         }
 
-        return null;
-    }
+//         return null;
+//     }
 
 // ============================================
 // UTILITY FUNCTIONS
